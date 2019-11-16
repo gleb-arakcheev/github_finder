@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+First react project from Brad Traversy's course. Will change and update it later
+Live preview https://gleb-arakcheev.github.io/github_finder/
+
 ## Available Scripts
 
 In the project directory, you can run:
