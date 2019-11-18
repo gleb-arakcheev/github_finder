@@ -23,27 +23,27 @@ const Search = () => {
   return (
     <div>
       <form onSubmit={onSubmit} className='form'>
-        <input
-          type='text'
-          name='text'
-          placeholder='Search Users...'
-          value={text}
-          onChange={onChange}
-        />
-        <input
-          type='submit'
-          value='Search'
-          className='btn btn-dark btn-block'
-        />
+        <div className='search'>
+          <input
+            type='text'
+            name='text'
+            placeholder='Search Users...'
+            value={text}
+            onChange={onChange}
+          />
+          <button className='search-button'>
+            <i className='fas fa-search'></i>
+          </button>
+        </div>
       </form>
-      {githubContext.users.length > 0 && (
+      {/* {githubContext.users.length > 0 && (
         <button
           className='btn btn-light btn-block'
           onClick={githubContext.clearUsers}
         >
           Clear
         </button>
-      )}
+      )} */}
     </div>
   );
 };
