@@ -6,12 +6,14 @@ import Search from '../users/Search';
 const Navbar = ({ icon, title }) => {
   return (
     <nav className='navbar bg-primary'>
-      <h1>
-        <Link to='/'>
-          <i className={icon}></i> {title}
-        </Link>
-      </h1>
-      <Search />
+      <div className='left-nav-part'>
+        <h1>
+          <Link to='/'>
+            <i className={icon}></i> {title}
+          </Link>
+        </h1>
+        <Search />
+      </div>
       <ul>
         <li>
           <Link to='/'>Home</Link>

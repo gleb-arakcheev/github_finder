@@ -319,7 +319,8 @@ img {
 }
 
 /* Forms */
-input {
+input,
+select {
   margin: 1.2rem 0;
 }
 
@@ -340,7 +341,6 @@ textarea {
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
-  border-radius: 7 px;
 }
 
 input[type='text']:focus,
@@ -393,12 +393,20 @@ table th {
   margin-right: 0.6rem;
 }
 
+.left-nav-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Search bar */
 .search {
   display: flex;
   align-items: center;
   border: 3px solid #fff;
   border-radius: 7px;
+  margin-left: 3rem;
+  width: 380px;
 }
 
 .search input {
@@ -415,6 +423,12 @@ table th {
 
 .search-button i {
   color: #fff;
+}
+
+/* filters area */
+.filter-title label {
+  cursor: pointer;
+  user-select: none;
 }
 
 /* Mobile Styles */
