@@ -2,27 +2,50 @@ import React from 'react';
 
 const Filters = () => {
   const checkboxChange = e => {
-    console.log(e.target.parentElement.parentElement.children[1]);
+    // console.log(
+    //   e.target.parentElement.parentElement.querySelector(
+    //     'input[type=text], select, input[type=range]'
+    //   )
+    // );
     const parentElement = e.target.parentElement.parentElement;
+    const switchingElement = parentElement.querySelector(
+      'input[type=text], select, input[type=range]'
+    );
     if (e.target.checked === false) {
-      parentElement.children[1].disabled = true;
+      //
+      switchingElement.disabled = true;
+      disableFilter(parentElement, true);
     } else {
-      parentElement.children[1].disabled = false;
+      switchingElement.disabled = false;
+      disableFilter(parentElement, false);
+    }
+  };
+
+  const disableFilter = (target, disable) => {
+    if (disable) {
+      target.classList.add('filter-disabled');
+      target.classList.remove('filter-active');
+    } else {
+      target.classList.add('filter-active');
+      target.classList.remove('filter-disabled');
     }
   };
 
   return (
     <div className='filters' style={FiltersStyle}>
-      <div className='location-filter'>
+      <label
+        className='filter location-filter filter-disabled'
+        htmlFor='location'
+      >
         <div className='filter-title'>
           <input
-            disabled
             type='checkbox'
             id='location'
             name='location'
             onChange={checkboxChange}
           />
-          <label htmlFor='location'>Location</label>
+          <span className='checkmark'></span>
+          <div>Location</div>
         </div>
         <input
           disabled
@@ -31,8 +54,11 @@ const Filters = () => {
           name='location-value'
           placeholder='Location...'
         />
-      </div>
-      <div className='language-filter'>
+      </label>
+      <label
+        className='filter language-filter filter-disabled'
+        htmlFor='language'
+      >
         <div className='filter-title'>
           <input
             type='checkbox'
@@ -40,9 +66,10 @@ const Filters = () => {
             name='language'
             onChange={checkboxChange}
           />
-          <label htmlFor='language'>Language</label>
+          <span className='checkmark'></span>
+          <div>Language</div>
         </div>
-        <select name='language-value' id='language-value'>
+        <select disabled name='language-value' id='language-value'>
           {/* values are hardcored cuz i didnt find github api to get all possible options. i put some from the top of my head, doesnt really matter */}
           <option value='javascript'>Javascript</option>
           <option value='html'>HTML</option>
@@ -52,8 +79,8 @@ const Filters = () => {
           <option value='php'>PHP</option>
           <option value='go'>GO</option>
         </select>
-      </div>
-      <div className='repos-filter'>
+      </label>
+      <label className='filter repos-filter filter-disabled' htmlFor='repos'>
         <div className='filter-title'>
           <input
             type='checkbox'
@@ -61,16 +88,20 @@ const Filters = () => {
             name='repos'
             onChange={checkboxChange}
           />
-          <label htmlFor='repos'>Repos</label>
+          <span className='checkmark'></span>
+          <div> Repositories</div>
         </div>
+        <span className='repos-count'>0</span>
         <input
+          className='repos-input'
+          disabled
           type='range'
           name='repos-value'
           id='repos-value'
           min='0'
           max='1000'
         />
-      </div>
+      </label>
     </div>
   );
 };
@@ -78,7 +109,8 @@ const Filters = () => {
 const FiltersStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
-  gridGap: '1rem'
+  gridGap: '3rem',
+  marginBottom: '0.4rem'
 };
 
 export default Filters;

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Search from '../users/Search';
+import Filters from '../filters/Filters';
 import Users from '../users/Users';
 
 // not used atm, update or delete
@@ -7,6 +7,7 @@ import Users from '../users/Users';
 const Home = () => {
   return (
     <Fragment>
+      <Filters />
       <Users />
     </Fragment>
   );

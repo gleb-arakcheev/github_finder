@@ -7,6 +7,7 @@
   --light-color: #f4f4f4;
   --danger-color: #ffc107;
   --success-color: #28a745;
+  --secondary-color: #e7e7e7;
 }
 
 * {
@@ -119,6 +120,7 @@ img {
   border: #ccc 1px solid;
   margin: 0.7rem 0;
   border-radius: 7px;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Card button hover */
@@ -373,6 +375,8 @@ table th {
   width: 100%;
   opacity: 0.9;
   margin-bottom: 1rem;
+  border-radius: 0;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
 .navbar ul {
@@ -407,6 +411,7 @@ table th {
   border-radius: 7px;
   margin-left: 3rem;
   width: 380px;
+  background-color: #fff;
 }
 
 .search input {
@@ -415,10 +420,17 @@ table th {
 }
 
 .search-button {
-  width: 20%;
   background-color: var(--primary-color);
   border: none;
   cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 7px;
+  transition: border-radius 0.2s;
+}
+
+.search-button:hover {
+  border-radius: 100px;
+  transition: border-radius 0.4s ease-in;
 }
 
 .search-button i {
@@ -426,9 +438,103 @@ table th {
 }
 
 /* filters area */
-.filter-title label {
+.filter {
   cursor: pointer;
+  border-radius: 7px;
+  background-color: var(--secondary-color);
+  padding: 0.8rem 0.8rem;
+}
+
+.filter-active {
+  opacity: 1;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
+}
+
+.filter-disabled {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.filter-disabled:hover {
+  opacity: 0.7;
+}
+
+.filter-active:hover {
+  opacity: 0.9;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
+}
+
+.filter input,
+.filter select {
+  margin: 0;
+}
+
+.filter-title div {
+  display: inline-block;
   user-select: none;
+  padding-left: 30px;
+}
+
+.filter .repos-input {
+  display: inline-block;
+  margin-left: 1rem;
+  vertical-align: sub;
+  margin-top: 0.6rem;
+}
+
+/* filter checkbox */
+.filter-title {
+  display: block;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-bottom: 0.8rem;
+}
+
+.filter-title input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 7px;
+  background-color: #eee;
+}
+
+.filter-title input:checked ~ .checkmark {
+  background-color: var(--primary-color);
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.filter-title input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.filter-title .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 /* Mobile Styles */
