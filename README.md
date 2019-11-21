@@ -1,6 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-First react project from Brad Traversy's course. Will change and update it later
+First react project from Brad Traversy's course. Refactoring and adding features atm
+
 
 Live preview https://gleb-arakcheev.github.io/github_finder/
 
