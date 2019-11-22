@@ -417,24 +417,22 @@ table th {
 .search input {
   margin: 0;
   border: none;
+  border-right: 2px solid var(--secondary-color);
 }
 
 .search-button {
-  background-color: var(--primary-color);
+  background-color: #fff;
   border: none;
   cursor: pointer;
   padding: 8px 16px;
-  border-radius: 7px;
-  transition: border-radius 0.2s;
 }
 
 .search-button:hover {
-  border-radius: 100px;
-  transition: border-radius 0.4s ease-in;
+  background-color: var(--secondary-color);
 }
 
 .search-button i {
-  color: #fff;
+  color: var(--primary-color);
 }
 
 /* filters area */
