@@ -345,8 +345,9 @@ textarea {
   border: 1px solid #ccc;
 }
 
-input[type='text']:focus,
-button:focus {
+input:focus,
+button:focus,
+select:focus {
   outline: none;
 }
 
@@ -439,13 +440,14 @@ table th {
 .filter {
   cursor: pointer;
   border-radius: 7px;
-  background-color: var(--secondary-color);
+  /* background-color: var(--secondary-color); */
+  border: 1px solid var(--secondary-color);
   padding: 0.8rem 0.8rem;
 }
 
 .filter-active {
   opacity: 1;
-  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .filter-disabled {
@@ -459,12 +461,16 @@ table th {
 
 .filter-active:hover {
   opacity: 0.9;
-  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3); */
 }
 
 .filter input,
 .filter select {
   margin: 0;
+  height: 35px;
+  font-size: 1rem;
+  border-radius: 7px;
+  font-weight: 100;
 }
 
 .filter-title div {
@@ -475,9 +481,8 @@ table th {
 
 .filter .repos-input {
   display: inline-block;
-  margin-left: 1rem;
-  vertical-align: sub;
-  margin-top: 0.6rem;
+  margin-left: 2rem;
+  vertical-align: middle;
 }
 
 /* filter checkbox */
@@ -533,6 +538,42 @@ table th {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+input[type='range'] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type='range']:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  cursor: pointer;
+  margin-top: -5px;
+  /* margin-top: -14px; You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; Add cool effects to your sliders! */
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  opacity: 0.8;
+  height: 8.4px;
+  cursor: pointer;
+  /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
+  background: var(--primary-color);
+  border-radius: 7px;
+  /* border: 0.2px solid #010101; */
+}
+
+input[type='range']:focus::-webkit-slider-runnable-track {
+  opacity: 1;
 }
 
 /* Mobile Styles */
