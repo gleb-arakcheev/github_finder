@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 First react project from Brad Traversy's course. Refactoring and adding features atm
 
 
-Live preview https://gleb-arakcheev.github.io/github_finder/
+Live preview https://gleb-arakcheev.github.io/react_github_finder/
 
 ## Available Scripts
 
