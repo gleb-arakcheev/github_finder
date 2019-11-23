@@ -11,25 +11,28 @@ import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
 
 import './App.css';
+import SearchState from './context/search/SearchState';
 
 const App = () => {
   return (
     <GithubState>
       <AlertState>
-        <Router>
-          <div className='App'>
-            <Navbar />
-            <div className='container'>
-              <Alert />
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/about' component={About} />
-                <Route exact path='/user/:login' component={User} />
-                <Route component={NotFound} />
-              </Switch>
+        <SearchState>
+          <Router>
+            <div className='App'>
+              <Navbar />
+              <div className='container'>
+                <Alert />
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/user/:login' component={User} />
+                  <Route component={NotFound} />
+                </Switch>
+              </div>
             </div>
-          </div>
-        </Router>
+          </Router>
+        </SearchState>
       </AlertState>
     </GithubState>
   );

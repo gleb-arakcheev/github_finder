@@ -473,6 +473,11 @@ table th {
   font-weight: 100;
 }
 
+.filter .repos-count {
+  display: inline-block;
+  width: 30px;
+}
+
 .filter-title div {
   display: inline-block;
   user-select: none;

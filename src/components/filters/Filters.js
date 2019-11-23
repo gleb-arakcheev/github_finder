@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import SearchContext from '../../context/search/searchContext';
 
 const Filters = () => {
+  // const initialState = {
+  //   location: null,
+  //   language: null,
+  //   repos: null
+  // };
+
+  const searchContext = useContext(SearchContext);
+
+  // const [filters, setFilters] = useState(initialState);
+
   const checkboxChange = e => {
-    // console.log(
-    //   e.target.parentElement.parentElement.querySelector(
-    //     'input[type=text], select, input[type=range]'
-    //   )
-    // );
     const parentElement = e.target.parentElement.parentElement;
     const switchingElement = parentElement.querySelector(
       'input[type=text], select, input[type=range]'
@@ -15,12 +21,15 @@ const Filters = () => {
       //
       switchingElement.disabled = true;
       disableFilter(parentElement, true);
+      stateFilterDisable(parentElement, true);
     } else {
       switchingElement.disabled = false;
       disableFilter(parentElement, false);
+      stateFilterDisable(parentElement, false, switchingElement);
     }
   };
 
+  // switching filter on/off true == filter off, false == filter on
   const disableFilter = (target, disable) => {
     if (disable) {
       target.classList.add('filter-disabled');
@@ -31,10 +40,62 @@ const Filters = () => {
     }
   };
 
+  const stateFilterDisable = (target, disable, input = null) => {
+    if (disable) {
+      switch (target.getAttribute('filter')) {
+        case 'location':
+          searchContext.setLocation(null);
+          break;
+        case 'language':
+          searchContext.setLanguage(null);
+          break;
+        case 'repos':
+          searchContext.setRepos(null);
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (target.getAttribute('filter')) {
+        case 'location':
+          searchContext.setLocation(input.value);
+          break;
+        case 'language':
+          searchContext.setLanguage(input.value);
+          break;
+        case 'repos':
+          searchContext.setRepos(input.value);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  const reposOnChange = e => {
+    // console.log();
+    e.target.parentElement.querySelector('.repos-count').innerText =
+      e.target.value;
+
+    // setFilters({ ...filters, repos: e.target.value });
+    searchContext.setRepos(e.target.value);
+  };
+
+  const locationOnChange = e => {
+    // setFilters({ ...filters, location: e.target.value });
+    searchContext.setLocation(e.target.value);
+  };
+
+  const languageOnChange = e => {
+    // setFilters({ ...filters, language: e.target.value });
+    searchContext.setLanguage(e.target.value);
+  };
+
   return (
     <div className='filters' style={FiltersStyle}>
       <label
         className='filter location-filter filter-disabled'
+        filter='location'
         htmlFor='location'
       >
         <div className='filter-title'>
@@ -53,10 +114,12 @@ const Filters = () => {
           id='location-value'
           name='location-value'
           placeholder='Location...'
+          onChange={locationOnChange}
         />
       </label>
       <label
         className='filter language-filter filter-disabled'
+        filter='language'
         htmlFor='language'
       >
         <div className='filter-title'>
@@ -69,7 +132,12 @@ const Filters = () => {
           <span className='checkmark'></span>
           <div>Language</div>
         </div>
-        <select disabled name='language-value' id='language-value'>
+        <select
+          disabled
+          name='language-value'
+          id='language-value'
+          onChange={languageOnChange}
+        >
           {/* values are hardcored cuz i didnt find github api to get all possible options. i put some from the top of my head, doesnt really matter */}
           <option value='javascript'>Javascript</option>
           <option value='html'>HTML</option>
@@ -80,7 +148,11 @@ const Filters = () => {
           <option value='go'>GO</option>
         </select>
       </label>
-      <label className='filter repos-filter filter-disabled' htmlFor='repos'>
+      <label
+        className='filter repos-filter filter-disabled'
+        htmlFor='repos'
+        filter='repos'
+      >
         <div className='filter-title'>
           <input
             type='checkbox'
@@ -100,6 +172,7 @@ const Filters = () => {
           id='repos-value'
           min='0'
           max='1000'
+          onChange={reposOnChange}
         />
       </label>
     </div>

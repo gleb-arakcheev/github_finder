@@ -1,24 +1,42 @@
 import React, { useState, useContext } from 'react';
 import GithubContext from '../../context/github/githubContext';
 import AlertContext from '../../context/alert/alertContext';
+import SearchContext from '../../context/search/searchContext';
 
 const Search = () => {
   const alertContext = useContext(AlertContext);
   const githubContext = useContext(GithubContext);
+  const searchContext = useContext(SearchContext);
 
-  const [text, setText] = useState('');
+  const [name, setName] = useState('');
+
+  // composing search query
+  const makeQuery = (name, filters) => {
+    let query = name;
+    for (let filterName in filters) {
+      if (filters[filterName]) {
+        if (filterName === 'repos') {
+          query += `+${filterName}:>${filters[filterName]}`;
+        } else {
+          query += `+${filterName}:${filters[filterName]}`;
+        }
+      }
+    }
+    return query;
+  };
 
   const onSubmit = e => {
+    const filters = searchContext.getFilters();
     e.preventDefault();
-    if (text === '') {
+    if (name === '') {
       alertContext.setAlert('Please enter something', 'light');
     } else {
-      githubContext.searchUsers(text);
-      setText('');
+      const query = makeQuery(name, filters);
+      githubContext.searchUsers(query);
     }
   };
 
-  const onChange = e => setText(e.target.value);
+  const onChange = e => setName(e.target.value);
 
   return (
     <div>
@@ -28,7 +46,7 @@ const Search = () => {
             type='text'
             name='text'
             placeholder='Search Users...'
-            value={text}
+            value={name}
             onChange={onChange}
           />
           <button className='search-button'>

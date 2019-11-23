@@ -31,11 +31,15 @@ const GithubState = props => {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
   // Search users
-  const searchUsers = async text => {
+  const searchUsers = async query => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+      `https://api.github.com/search/users?q=${query}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+    );
+
+    console.log(
+      `https://api.github.com/search/users?q=${query}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
 
     dispatch({
