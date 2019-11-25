@@ -1,16 +1,32 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import SearchContext from '../../context/search/searchContext';
 
 const Filters = () => {
-  // const initialState = {
-  //   location: null,
-  //   language: null,
-  //   repos: null
-  // };
-
   const searchContext = useContext(SearchContext);
 
-  // const [filters, setFilters] = useState(initialState);
+  const { location, language, repos } = searchContext.getFilters();
+
+  let locationSpecified = true;
+
+  useEffect(() => {
+    if (location) {
+      document.querySelector('.location-filter').click();
+      document.getElementById('location-value').value = location;
+      searchContext.setLocation(location);
+    }
+    if (language) {
+      document.querySelector('.language-filter').click();
+      document.getElementById('language-value').value = language;
+      searchContext.setLanguage(language);
+    }
+    if (repos) {
+      document.querySelector('.repos-filter').click();
+      document.querySelector('.repos-count').innerText = repos;
+      document.getElementById('repos-value').value = repos;
+      searchContext.setRepos(repos);
+    }
+    //eslint-disable-next-line
+  }, []);
 
   const checkboxChange = e => {
     const parentElement = e.target.parentElement.parentElement;
@@ -76,7 +92,6 @@ const Filters = () => {
     // console.log();
     e.target.parentElement.querySelector('.repos-count').innerText =
       e.target.value;
-
     // setFilters({ ...filters, repos: e.target.value });
     searchContext.setRepos(e.target.value);
   };
@@ -109,12 +124,12 @@ const Filters = () => {
           <div>Location</div>
         </div>
         <input
-          disabled
           type='text'
           id='location-value'
           name='location-value'
           placeholder='Location...'
           onChange={locationOnChange}
+          disabled={locationSpecified}
         />
       </label>
       <label

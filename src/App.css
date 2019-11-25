@@ -418,12 +418,14 @@ table th {
 .search input {
   margin: 0;
   border: none;
-  border-right: 2px solid var(--secondary-color);
 }
 
 .search-button {
   background-color: #fff;
   border: none;
+  border-left: 2px solid var(--secondary-color);
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
   cursor: pointer;
   padding: 8px 16px;
 }

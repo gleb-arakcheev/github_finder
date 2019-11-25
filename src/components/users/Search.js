@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import GithubContext from '../../context/github/githubContext';
 import AlertContext from '../../context/alert/alertContext';
 import SearchContext from '../../context/search/searchContext';
@@ -7,6 +8,7 @@ const Search = () => {
   const alertContext = useContext(AlertContext);
   const githubContext = useContext(GithubContext);
   const searchContext = useContext(SearchContext);
+  const history = useHistory();
 
   const [name, setName] = useState('');
 
@@ -25,7 +27,13 @@ const Search = () => {
     return query;
   };
 
+  // redirecting to home page if we are not already there
+  const redirectToHome = () => {
+    history.push('/');
+  };
+
   const onSubmit = e => {
+    redirectToHome();
     const filters = searchContext.getFilters();
     e.preventDefault();
     if (name === '') {
