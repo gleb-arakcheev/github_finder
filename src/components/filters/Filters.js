@@ -1,91 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SearchContext from '../../context/search/searchContext';
+import FilterTitle from './filterTitle';
 
 const Filters = () => {
   const searchContext = useContext(SearchContext);
-
   const { location, language, repos } = searchContext.getFilters();
 
-  let locationSpecified = true;
+  const checkboxChange = e => {};
 
-  useEffect(() => {
-    if (location) {
-      document.querySelector('.location-filter').click();
-      document.getElementById('location-value').value = location;
-      searchContext.setLocation(location);
-    }
-    if (language) {
-      document.querySelector('.language-filter').click();
-      document.getElementById('language-value').value = language;
-      searchContext.setLanguage(language);
-    }
-    if (repos) {
-      document.querySelector('.repos-filter').click();
-      document.querySelector('.repos-count').innerText = repos;
-      document.getElementById('repos-value').value = repos;
-      searchContext.setRepos(repos);
-    }
-    //eslint-disable-next-line
-  }, []);
+  const [check, setCheck] = useState(false);
 
-  const checkboxChange = e => {
-    const parentElement = e.target.parentElement.parentElement;
-    const switchingElement = parentElement.querySelector(
-      'input[type=text], select, input[type=range]'
-    );
-    if (e.target.checked === false) {
-      //
-      switchingElement.disabled = true;
-      disableFilter(parentElement, true);
-      stateFilterDisable(parentElement, true);
-    } else {
-      switchingElement.disabled = false;
-      disableFilter(parentElement, false);
-      stateFilterDisable(parentElement, false, switchingElement);
-    }
-  };
-
-  // switching filter on/off true == filter off, false == filter on
-  const disableFilter = (target, disable) => {
-    if (disable) {
-      target.classList.add('filter-disabled');
-      target.classList.remove('filter-active');
-    } else {
-      target.classList.add('filter-active');
-      target.classList.remove('filter-disabled');
-    }
-  };
-
-  const stateFilterDisable = (target, disable, input = null) => {
-    if (disable) {
-      switch (target.getAttribute('filter')) {
-        case 'location':
-          searchContext.setLocation(null);
-          break;
-        case 'language':
-          searchContext.setLanguage(null);
-          break;
-        case 'repos':
-          searchContext.setRepos(null);
-          break;
-        default:
-          break;
-      }
-    } else {
-      switch (target.getAttribute('filter')) {
-        case 'location':
-          searchContext.setLocation(input.value);
-          break;
-        case 'language':
-          searchContext.setLanguage(input.value);
-          break;
-        case 'repos':
-          searchContext.setRepos(input.value);
-          break;
-        default:
-          break;
-      }
-    }
+  const myFunc = () => {
+    console.log('changed' + !check);
+    setCheck(!check);
   };
 
   const reposOnChange = e => {
@@ -104,32 +31,24 @@ const Filters = () => {
   const languageOnChange = e => {
     // setFilters({ ...filters, language: e.target.value });
     searchContext.setLanguage(e.target.value);
+    setCheck(!check);
   };
 
   return (
-    <div className='filters' style={FiltersStyle}>
+    <div className='filters'>
       <label
         className='filter location-filter filter-disabled'
         filter='location'
         htmlFor='location'
       >
-        <div className='filter-title'>
-          <input
-            type='checkbox'
-            id='location'
-            name='location'
-            onChange={checkboxChange}
-          />
-          <span className='checkmark'></span>
-          <div>Location</div>
-        </div>
+        <FilterTitle name={'Location'} />
         <input
           type='text'
           id='location-value'
           name='location-value'
           placeholder='Location...'
           onChange={locationOnChange}
-          disabled={locationSpecified}
+          disabled
         />
       </label>
       <label
@@ -192,13 +111,6 @@ const Filters = () => {
       </label>
     </div>
   );
-};
-
-const FiltersStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gridGap: '3rem',
-  marginBottom: '0.4rem'
 };
 
 export default Filters;

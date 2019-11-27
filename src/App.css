@@ -439,6 +439,13 @@ table th {
 }
 
 /* filters area */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+  margin-bottom: 0.4rem;
+}
+
 .filter {
   cursor: pointer;
   border-radius: 7px;

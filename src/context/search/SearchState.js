@@ -5,7 +5,10 @@ import { GET_FILTERS, SET_LOCATION, SET_LANGUAGE, SET_REPOS } from '../types';
 
 const SearchState = props => {
   const initialState = {
-    location: null,
+    location: {
+      value: null,
+      isEnabled: false
+    },
     language: null,
     repos: null
   };
