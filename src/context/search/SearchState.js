@@ -1,16 +1,29 @@
 import React, { useReducer } from 'react';
 import SearchContext from './searchContext';
 import SearchReducer from './searchReducer';
-import { GET_FILTERS, SET_LOCATION, SET_LANGUAGE, SET_REPOS } from '../types';
+import {
+  GET_FILTER_LOCATION,
+  GET_FILTER_REPOS,
+  GET_FILTER_LANGUAGE,
+  SET_FILTER_LOCATION,
+  SET_FILTER_LANGUAGE,
+  SET_FILTER_REPOS
+} from '../types';
 
 const SearchState = props => {
   const initialState = {
     location: {
-      value: null,
+      value: '',
       isEnabled: false
     },
-    language: null,
-    repos: null
+    language: {
+      value: '',
+      isEnabled: false
+    },
+    repos: {
+      value: '',
+      isEnabled: false
+    }
   };
 
   const [state, dispatch] = useReducer(SearchReducer, initialState);
@@ -18,23 +31,34 @@ const SearchState = props => {
   // Set location
   const setLocation = location => {
     dispatch({
-      type: SET_LOCATION,
+      type: SET_FILTER_LOCATION,
       payload: location
     });
   };
   // Set Language
   const setLanguage = language => {
     dispatch({
-      type: SET_LANGUAGE,
+      type: SET_FILTER_LANGUAGE,
       payload: language
     });
   };
   // Set repos
   const setRepos = repos => {
     dispatch({
-      type: SET_REPOS,
+      type: SET_FILTER_REPOS,
       payload: repos
     });
+  };
+
+  const getLocation = () => {
+    return state.location;
+  };
+
+  const getLanguage = () => {
+    return state.language;
+  };
+  const getRepos = () => {
+    return state.repos;
   };
 
   const getFilters = () => {
@@ -60,7 +84,10 @@ const SearchState = props => {
         setLocation,
         setLanguage,
         setRepos,
-        getFilters
+        getFilters,
+        getLocation,
+        getLanguage,
+        getRepos
       }}
     >
       {props.children}

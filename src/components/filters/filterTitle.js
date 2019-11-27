@@ -2,6 +2,7 @@ import React from 'react';
 
 const filterTitle = ({ name }) => {
   const lowercaseName = name.toLowerCase();
+  const uppercaseName = name[0].toUpperCase() + name.slice(1).toLowerCase();
 
   return (
     <div className='filter-title'>
@@ -12,7 +13,7 @@ const filterTitle = ({ name }) => {
         // onChange={checkboxChange}
       />
       <span className='checkmark'></span>
-      <div>{name}</div>
+      <div>{uppercaseName}</div>
     </div>
   );
 };
