@@ -13,19 +13,24 @@ const FilterLanguage = () => {
 
   return (
     <label
-      className='filter language-filter filter-disabled'
+      className={`filter language-filter ${
+        language.isEnabled ? 'filter-active' : 'filter-disabled'
+      }`}
       filter='language'
       htmlFor='language'
     >
-      <FilterTitle name={'language'} />
+      <FilterTitle name={'language'} isChecked={language.isEnabled} />
       <select
-        // disabled
+        disabled={!language.isEnabled}
         name='language-value'
         id='language-value'
         onChange={languageOnChange}
         value={language.value}
       >
         {/* values are hardcored cuz i didnt find github api to get all possible options. i put some from the top of my head, doesnt really matter */}
+        <option value='' hidden>
+          Choose here
+        </option>
         <option value='javascript'>Javascript</option>
         <option value='html'>HTML</option>
         <option value='java'>Java</option>

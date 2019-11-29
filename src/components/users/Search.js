@@ -14,13 +14,14 @@ const Search = () => {
 
   // composing search query
   const makeQuery = (name, filters) => {
+    console.log(filters);
     let query = name;
     for (let filterName in filters) {
-      if (filters[filterName]) {
+      if (filters[filterName].isEnabled && filters[filterName].value !== '') {
         if (filterName === 'repos') {
-          query += `+${filterName}:>${filters[filterName]}`;
+          query += `+${filterName}:>${filters[filterName].value}`;
         } else {
-          query += `+${filterName}:${filters[filterName]}`;
+          query += `+${filterName}:${filters[filterName].value}`;
         }
       }
     }

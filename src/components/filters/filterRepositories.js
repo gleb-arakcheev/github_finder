@@ -16,15 +16,17 @@ const FilterRepositories = () => {
 
   return (
     <label
-      className='filter repos-filter filter-disabled'
+      className={`filter language-filter ${
+        repos.isEnabled ? 'filter-active' : 'filter-disabled'
+      }`}
       htmlFor='repositories'
       filter='repositories'
     >
-      <FilterTitle name='repositories' />
+      <FilterTitle name='repositories' isChecked={repos.isEnabled} />
       <span className='repos-count'>{repos.value}</span>
       <input
         className='repos-input'
-        // disabled
+        disabled={!repos.isEnabled}
         type='range'
         name='repos-value'
         id='repos-value'

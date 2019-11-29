@@ -13,12 +13,15 @@ const FilterLocation = () => {
 
   return (
     <label
-      className='filter location-filter filter-disabled'
+      className={`filter location-filter ${
+        location.isEnabled ? 'filter-active' : 'filter-disabled'
+      }`}
       filter='location'
       htmlFor='location'
     >
-      <FilterTitle name={'location'} />
+      <FilterTitle name={'location'} isChecked={location.isEnabled} />
       <input
+        disabled={!location.isEnabled}
         type='text'
         id='location-value'
         name='location-value'
