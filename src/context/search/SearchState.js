@@ -20,7 +20,7 @@ const SearchState = props => {
   const initialState = {
     location: {
       value: '',
-      isEnabled: true
+      isEnabled: false
     },
     language: {
       value: '',
