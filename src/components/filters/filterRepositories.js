@@ -7,11 +7,8 @@ const FilterRepositories = () => {
   const repos = searchContext.getRepos();
 
   const reposOnChange = e => {
-    // console.log();
-    // e.target.parentElement.querySelector('.repos-count').innerText =
-    //   e.target.value;
-    // setFilters({ ...filters, repos: e.target.value });
-    searchContext.setRepos(e.target.value);
+    const expRepos = Math.round(Math.exp(e.target.value / 10));
+    searchContext.setRepos(expRepos);
   };
 
   return (
@@ -31,8 +28,8 @@ const FilterRepositories = () => {
         name='repos-value'
         id='repos-value'
         min='0'
-        max='1000'
-        value={repos.value}
+        max='100'
+        value={Math.round(Math.log(repos.value) * 10)}
         onChange={reposOnChange}
       />
     </label>

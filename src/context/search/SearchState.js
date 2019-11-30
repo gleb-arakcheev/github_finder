@@ -27,7 +27,7 @@ const SearchState = props => {
       isEnabled: false
     },
     repos: {
-      value: '',
+      value: 1,
       isEnabled: false
     }
   };
