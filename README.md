@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-First react project from Brad Traversy's course. Refactoring and adding features atm
+First react project from Brad Traversy's course. Refactored here and there, added custom search filters
 
 
 Live preview https://ragtimecat.github.io/react_github_finder/
